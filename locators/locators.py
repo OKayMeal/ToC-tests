@@ -17,6 +17,7 @@ BTN_TEXT_LOCATORS = {
     'ng+': 'NG+',
     'yes': 'YES',
     'no': 'NO',
+    'high_scores': 'HIGH SCORES',
 }
 
 # Title Screen
@@ -57,3 +58,10 @@ NG_BUTTON_TOGGLED_LOC = (By.CLASS_NAME, 'ng-toggled')
 
 # Intro section
 INTRO_DIV_LOC = (By.CLASS_NAME, 'intro')
+
+# High Scores section
+LOADING_LOC = (By.ID, 'loading')
+NO_CONNECTION_P_LOC = (By.ID, 'no-connection')
+NO_HIGHSCORES_P_LOC = (By.ID, 'no-highscores-yet')
+HIGHSCORES_TABLE = (By.CLASS_NAME, 'highscores-table')
+HIGHSCORES_TABLE_HEADERS_LOC = (By.TAG_NAME, 'th')

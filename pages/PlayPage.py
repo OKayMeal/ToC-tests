@@ -13,5 +13,6 @@ class PlayPage(BasePage):
         # elements
         self.navigation_wrapper = WebDriverWait(driver, 10).until(EC.visibility_of_element_located(NAVIGATION_WRAPPER_LOC))
         self.main_game_btn = Button(driver, BTN_TEXT_LOCATORS['main_game'])
+        self.high_scores_btn = Button(driver, BTN_TEXT_LOCATORS['high_scores'])
         self.survival_btn = Button(driver, BTN_TEXT_LOCATORS['survival'])
         self.back_btn = Button(driver, BTN_TEXT_LOCATORS['back'])
