@@ -42,6 +42,7 @@ class HighScoresPage(BasePage):
             self.high_scores_table = self.driver.find_element(*HIGHSCORES_TABLE)
             self.high_scores_table_headers_elements = self.high_scores_table.find_elements(*HIGHSCORES_TABLE_HEADERS_LOC)
             
+            # make a list of table headers
             self.high_scores_table_headers = []
             for element in self.high_scores_table_headers_elements:
                 self.high_scores_table_headers.append(element.text)
