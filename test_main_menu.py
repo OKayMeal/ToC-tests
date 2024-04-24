@@ -29,7 +29,7 @@ class TestMainMenu(BaseTest):
         """
 
         patch_notes_page = self.main_menu.display_patch_notes()
-        
+        sleep(1) # ensure the patchnotes .txt files loaded
         assert patch_notes_page.patch_notes_div.is_displayed(), 'patchnotes div not found'
         assert patch_notes_page.patch_notes_header.is_displayed(), 'patchnotes header not found'
         assert patch_notes_page.patch_notes_text.is_displayed(), 'patch notes text not found'
@@ -358,7 +358,7 @@ class TestMainMenu(BaseTest):
         """
         
         patch_notes_page = self.main_menu.display_patch_notes()
-
+        sleep(1) # ensure the patchnotes .txt files loaded
         all_versions = patch_notes_page.get_all_versions()
 
         for version in all_versions:
