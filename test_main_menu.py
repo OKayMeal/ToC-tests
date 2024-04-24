@@ -1,6 +1,7 @@
 from time import sleep
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.common.by import By
+from BaseMainMenuTest import BaseMainMenuTest
 from locators.locators import CREDITS_DIV_LOC, NG_BUTTON_TOGGLED_LOC, PATCH_NOTES_DIV_LOC, SETTINGS_DIV_LOC
 from pages.HighScoresPage import HighScoresPage
 from pages.MainMenuPage import MainMenuPage
@@ -10,10 +11,9 @@ from pages.Game import Game
 from pages.PlayPage import PlayPage
 from pages.CheremPediaPage import CheremPediaPage
 from pages.PediaPage import PediaPage
-from BaseTest import BaseTest
 from pages.IntroPage import IntroPage
 
-class TestMainMenu(BaseTest):
+class TestMainMenu(BaseMainMenuTest):
     def test_MMenu_0001(self, driver: WebDriver):
         """
         Description:
