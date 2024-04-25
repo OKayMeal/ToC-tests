@@ -75,3 +75,5 @@ END_GAME_STATS_LOC = (By.TAG_NAME, 'p')
 
 # High Score submit form
 NAME_INPUT_LOC = (By.ID, 'name-input')
+NAME_WARNING_LOC = (By.ID, 'profanity-error')
+SUBMISSION_RESULT_MSG_LOC = (By.ID, 'form-submit-result')
