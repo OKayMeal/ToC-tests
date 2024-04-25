@@ -57,6 +57,7 @@ def driver(gameenv: str, browser: str):
         else:
             raise ValueError(f"Unsupported game environment: {gameenv}")
         
+        driver.game_env = gameenv
         driver.maximize_window()
         
         yield driver

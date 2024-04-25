@@ -226,3 +226,28 @@ class TestHighScoreForm(BaseHighScoreFormTest):
         self.high_score_form.get_form_warning()
         actual_msg = self.high_score_form.warning.text
         assert expected_msg in actual_msg, f'Expected message for english profanity in NAME: {expected_msg}. Actual message: {actual_msg}'
+    
+    
+    def test_HSForm_0010(self, driver: WebDriver):
+        """
+        Description:
+        Test submitting the form with correct  NAME
+        
+        Test Steps:
+        1. Go to HIGH SCORE submit form (by making player die)
+        2. In NAME field type correct name
+        3. Click SUBMIT
+        4. Click CONTINUE
+        5. Click PLAY
+        6. Click HIGH SCORES
+        
+        Expected Result:
+        3. - the form should get successfuly submitted OR there is a connection error
+        4 . - should get redirected to MAIN MENU
+        6. - if there was no connection error - there should be a new HIGH SCORE record displayed
+        """
+        
+        # TEST ONLY FOR DEV ENV
+        assert driver.game_env == 'dev', f'This test should only be executed on dev env. Env: {driver.game_env}'
+        
+        # TODO...
