@@ -1,6 +1,9 @@
 from time import sleep
 from selenium.webdriver.remote.webdriver import WebDriver
 from BaseHighScoreFormTest import BaseHighScoreFormTest
+from pages.HighScoresPage import HighScoresPage
+from pages.MainMenuPage import MainMenuPage
+from pages.PlayPage import PlayPage
 from pages.TitlePage import TitlePage
 
 
@@ -247,7 +250,67 @@ class TestHighScoreForm(BaseHighScoreFormTest):
         6. - if there was no connection error - there should be a new HIGH SCORE record displayed
         """
         
-        # TEST ONLY FOR DEV ENV
+        # !! TEST ONLY FOR DEV ENV !!
         assert driver.game_env == 'dev', f'This test should only be executed on dev env. Env: {driver.game_env}'
         
-        # TODO...
+        correct_name = 'Correct test Name'
+        
+        self.high_score_form.enter_name(correct_name)
+        self.high_score_form.submit_btn.click_btn()
+        
+        expected_msgs = ['submitted successfully', 'Could not connect to the server']
+        
+        self.high_score_form.get_submission_result() 
+        actual_msg = self.high_score_form.submit_result_msg.text
+        
+        found_expected_msg = False
+        submission_successful = False
+        if expected_msgs[0] in actual_msg:
+            found_expected_msg = True
+            submission_successful = True
+            
+        elif expected_msgs[1] in actual_msg:
+            found_expected_msg = True
+        
+        assert found_expected_msg, f'Expected messages "{expected_msgs}". Actual message: {actual_msg}'
+        
+        self.high_score_form.continue_btn.click_btn()
+        
+        main_menu = MainMenuPage(driver, True)
+        main_menu.play_btn.click_btn()
+        
+        play_page = PlayPage(driver)
+        play_page.high_scores_btn.click_btn()
+        
+        high_scores_page = HighScoresPage(driver)
+        high_scores_page.get_page_state_and_elements()
+        
+        if submission_successful:
+            expected_states = ['connected_records', 'no_connection']
+            assert (high_scores_page.state in expected_states), f"After successful submission expected high scores page states are '{expected_states}'. Actual state:  {high_scores_page.state}"
+            
+            if high_scores_page.state == 'connected_records':
+                # get all records and check if the newly added one is there
+                name_found = False
+                for data_element in high_scores_page.high_scores_table_data_elements:
+                    if correct_name in data_element.text:
+                        name_found = True
+                        break
+                assert name_found, f'Newly created record not found among the displayed high scores records'
+                
+        else:
+            # submission was unsuccessful
+            expected_states = ['connected_records', 'no_connection', 'no_connection']
+            assert (high_scores_page.state in expected_states), f"After unsuccessful submission expected high scores page states are '{expected_states}'. Actual state:  {high_scores_page.state}"
+            
+            if high_scores_page.state == 'connected_records':
+                # get all records and check if the one we were trying to add is NOT there
+                name_found = False
+                for data_element in high_scores_page.high_scores_table_data_elements:
+                    if correct_name in data_element.text:
+                        name_found = True
+                        break
+                assert not name_found, f'The record that failed to submit was found among the displayed high scores records'
+                # NOTE: THIS ASSERTION IS VALID ONLY ON DEV ENV WITH EMPTY DB, BECAUSE ON PROD IT IS PERFECTLY FINE TO SEE SEVERAL RECORDS WITH THE SAME NAME VALUE
+        
+        

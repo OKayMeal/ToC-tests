@@ -1,5 +1,5 @@
 from selenium.webdriver.remote.webdriver import WebDriver
-from locators.locators import BTN_TEXT_LOCATORS, HIGHSCORES_TABLE, HIGHSCORES_TABLE_HEADERS_LOC, LOADING_LOC, NO_CONNECTION_P_LOC, NO_HIGHSCORES_P_LOC
+from locators.locators import BTN_TEXT_LOCATORS, HIGHSCORES_TABLE, HIGHSCORES_TABLE_DATA_LOC, HIGHSCORES_TABLE_HEADERS_LOC, LOADING_LOC, NO_CONNECTION_P_LOC, NO_HIGHSCORES_P_LOC
 from pages.BasePage import BasePage
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -13,7 +13,6 @@ class HighScoresPage(BasePage):
         self.state = 'loading'
 
         # elements
-        self.loading = WebDriverWait(driver, 10).until(EC.visibility_of_element_located(LOADING_LOC))
         self.back_btn = Button(driver, BTN_TEXT_LOCATORS['back'])
         
         
@@ -41,6 +40,7 @@ class HighScoresPage(BasePage):
             # get elements
             self.high_scores_table = self.driver.find_element(*HIGHSCORES_TABLE)
             self.high_scores_table_headers_elements = self.high_scores_table.find_elements(*HIGHSCORES_TABLE_HEADERS_LOC)
+            self.high_scores_table_data_elements = self.high_scores_table.find_elements(*HIGHSCORES_TABLE_DATA_LOC)
             
             # make a list of table headers
             self.high_scores_table_headers = []

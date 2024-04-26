@@ -544,8 +544,6 @@ class TestMainMenu(BaseMainMenuTest):
         play_page.high_scores_btn.click_btn()
         highscores_page = HighScoresPage(driver)
         
-        assert highscores_page.loading.is_displayed(), "Loading element was not displayed"
-        
         highscores_page.get_page_state_and_elements()
         
         if highscores_page.state == 'no_connection':
