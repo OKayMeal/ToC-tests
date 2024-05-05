@@ -1,7 +1,9 @@
 from time import sleep
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.common.by import By
+from BaseMainMenuTest import BaseMainMenuTest
 from locators.locators import CREDITS_DIV_LOC, NG_BUTTON_TOGGLED_LOC, PATCH_NOTES_DIV_LOC, SETTINGS_DIV_LOC
+from pages.HighScoresPage import HighScoresPage
 from pages.MainMenuPage import MainMenuPage
 from pages.CreditsPage import CreditsPage
 from pages.SettingsPage import SettingsPage
@@ -9,10 +11,9 @@ from pages.Game import Game
 from pages.PlayPage import PlayPage
 from pages.CheremPediaPage import CheremPediaPage
 from pages.PediaPage import PediaPage
-from BaseTest import BaseTest
 from pages.IntroPage import IntroPage
 
-class TestMainMenu(BaseTest):
+class TestMainMenu(BaseMainMenuTest):
     def test_MMenu_0001(self, driver: WebDriver):
         """
         Description:
@@ -28,7 +29,7 @@ class TestMainMenu(BaseTest):
         """
 
         patch_notes_page = self.main_menu.display_patch_notes()
-        
+        sleep(1) # ensure the patchnotes .txt files loaded
         assert patch_notes_page.patch_notes_div.is_displayed(), 'patchnotes div not found'
         assert patch_notes_page.patch_notes_header.is_displayed(), 'patchnotes header not found'
         assert patch_notes_page.patch_notes_text.is_displayed(), 'patch notes text not found'
@@ -357,7 +358,7 @@ class TestMainMenu(BaseTest):
         """
         
         patch_notes_page = self.main_menu.display_patch_notes()
-
+        sleep(1) # ensure the patchnotes .txt files loaded
         all_versions = patch_notes_page.get_all_versions()
 
         for version in all_versions:
@@ -521,7 +522,54 @@ class TestMainMenu(BaseTest):
         assert initial_ultReady != new_ultReady, f'ultimateReady state should be false after pressing Q ult keyboard key, initial: {str(initial_ultReady)} new: {str(new_ultReady)}'
 
     
+    def test_MMenu_0016(self, driver: WebDriver):
+        """
+        Description:
+        Testing HIGH SCORES section
+
+        Test Steps:
+        1. Go to main menu
+        2. Click on PLAY button
+        3. Click on HIGH SCORES button
+        4. Click BACK
+        5. Click BACK
+
+        Expected Result:
+        3. first it should display LOADING, then either "Could not connect to the servrer..." OR "There are no high scores yet" OR display the table of high scores.
+        """
         
-
-
-
+        self.main_menu.play_btn.click_btn()
+        play_page = PlayPage(driver)
+        
+        play_page.high_scores_btn.click_btn()
+        highscores_page = HighScoresPage(driver)
+        
+        highscores_page.get_page_state_and_elements()
+        
+        if highscores_page.state == 'no_connection':
+            eror_text = 'Could not connect'
+            assert eror_text in highscores_page.no_connection_error.text, f"'{eror_text}' not found in {highscores_page.state}"
+            
+        elif highscores_page.state == 'connected_no_records':
+            eror_text = 'no high scores submitted'
+            assert eror_text in highscores_page.no_records_warning.text, f"'{eror_text}' not found in {highscores_page.state}"
+        
+        elif highscores_page.state == 'connected_records':
+            expected_table_headers = [
+                'NAME', 'LEVEL', 'TIME PLAYED', 'ENEMIES KILLED',
+                'BOSSES DEFEATED', 'GOLD LOOTED', 'EQUIPMENT',
+                'GOLD', 'DATE',
+            ]
+            actual_table_headers = highscores_page.high_scores_table_headers
+            
+            assert self.are_lists_equal(expected_table_headers, actual_table_headers), f"Expected High Scores table headers: {expected_table_headers}. Actual headers: {actual_table_headers}"
+        
+        # testing back navi
+        highscores_page.back_btn.click_btn()
+        play_page = PlayPage(driver)
+        assert play_page.navigation_wrapper.is_displayed(), 'navigation wrapper for PLAY section btns not found after clicking BACK btn in HighScoresPage'
+        
+        play_page.back_btn.click_btn()
+        main_menu = MainMenuPage(driver)
+        assert main_menu.version_div.is_displayed(), 'Version div (mmenu) not found in DOM after clicking BACK btn in PlayPage'
+         

@@ -17,6 +17,10 @@ BTN_TEXT_LOCATORS = {
     'ng+': 'NG+',
     'yes': 'YES',
     'no': 'NO',
+    'high_scores': 'HIGH SCORES',
+    'continue': 'CONTINUE',
+    'submit_high_score': 'SUBMIT HIGH SCORE',
+    'continue_no_submit': 'CONTINUE WITHOUT SUBMITTING',
 }
 
 # Title Screen
@@ -57,3 +61,20 @@ NG_BUTTON_TOGGLED_LOC = (By.CLASS_NAME, 'ng-toggled')
 
 # Intro section
 INTRO_DIV_LOC = (By.CLASS_NAME, 'intro')
+
+# High Scores section
+LOADING_LOC = (By.ID, 'loading')
+NO_CONNECTION_P_LOC = (By.ID, 'no-connection')
+NO_HIGHSCORES_P_LOC = (By.ID, 'no-highscores-yet')
+HIGHSCORES_TABLE = (By.CLASS_NAME, 'highscores-table')
+HIGHSCORES_TABLE_HEADERS_LOC = (By.TAG_NAME, 'th')
+HIGHSCORES_TABLE_DATA_LOC = (By.TAG_NAME, 'td')
+
+# End Game screen section
+END_GAME_STATS_DIV_LOC = (By.CLASS_NAME, 'game-finish-stats')
+END_GAME_STATS_LOC = (By.TAG_NAME, 'p')
+
+# High Score submit form
+NAME_INPUT_LOC = (By.ID, 'name-input')
+NAME_WARNING_LOC = (By.ID, 'profanity-error')
+SUBMISSION_RESULT_MSG_LOC = (By.ID, 'form-submit-result')

@@ -13,6 +13,13 @@ class Game(BasePage):
         self.game_canvas = WebDriverWait(driver, 10).until(EC.visibility_of_element_located(GAME_CANVAS_LOC))
         self.game_state = None
           
+    def set_player_properties(self, property: str, value: int | str | list):
+        """
+        Executes JS script to set given property to player object
+        """
+        
+        self.driver.execute_script(f'window.player.{property} = {value};')
+    
         
     def get_player_properties(self, property: str):
         """
@@ -20,14 +27,13 @@ class Game(BasePage):
 
         Available properties:
         'coordinates' - returns [player.x, player.y]
-        'ultimateReady' - returns boolean player.ultimateReady
+        any other viable property of player object e.g. ultimateReady, equipment, hp, etc.
         """
 
         if (property == 'coordinates'):
             return self.driver.execute_script('return [window.player.x, window.player.y];')
-        
-        elif (property == 'ultimateReady'):
-            return self.driver.execute_script('return window.player.ultimateReady;')
+        else:
+            return self.driver.execute_script(f'return window.player.{property};')
 
 
     def get_game_state(self):
