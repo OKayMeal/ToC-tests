@@ -19,7 +19,7 @@ class MainMenuPage(BasePage):
             title_screen = TitlePage(driver)
             
             if mobile:
-                title_screen.click()
+                title_screen.pressEnterButton.click()
             else:
                 title_screen.press_key('ENTER')
 

@@ -50,6 +50,18 @@ NAVIGATION_WRAPPER_LOC = (By.CLASS_NAME, 'navigation-wrapper')
 # Game section
 GAME_CANVAS_LOC = (By.XPATH, "//canvas[contains(@style, 'image-rendering: pixelated;')]")
 
+# Mobile Controls section
+SHOOT_BTN_LOC = (By.ID, 'shoot-btn')
+ULT_BTN_LOC = (By.ID, 'ult-btn')
+TRAP_BTN_LOC = (By.ID, 'trap-btn')
+UP_ARROW_BTN_LOC = (By.ID, 'up-arrow-btn')
+DOWN_ARROW_BTN_LOC = (By.ID, 'down-arrow-btn')
+LEFT_ARROW_BTN_LOC = (By.ID, 'left-arrow-btn')
+RIGHT_ARROW_BTN_LOC = (By.ID, 'right-arrow-btn')
+
+# Game HUD section
+SETTINGS_HUD_BTN_LOC = (By.ID, 'settings-btn')
+
 # Bestiary + Items pedia section
 RECORDS_CARD_LOC = (By.CLASS_NAME, 'records-card')
 RECORDS_IMAGES_GENERIC_LOC = (By.TAG_NAME, 'img')
