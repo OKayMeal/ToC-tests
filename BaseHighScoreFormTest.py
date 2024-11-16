@@ -12,6 +12,7 @@ from pages.Game import Game
 class BaseHighScoreFormTest(BaseTest):
     @pytest.fixture(autouse=True)
     def setup(self, driver: WebDriver):
+        driver.maximize_window()
         main_menu = MainMenuPage(driver, True)
         main_menu.play_btn.click_btn()
         

@@ -11,13 +11,17 @@ from pages.TitlePage import TitlePage
 
 
 class MainMenuPage(BasePage):
-    def __init__(self, driver: WebDriver, app_launch=False):
+    def __init__(self, driver: WebDriver, app_launch: bool = False, mobile: bool = False):
         super().__init__(driver)
 
         # navigate to main menu from title screen upon app_launch - this is just pressing ENTER key
         if app_launch:
             title_screen = TitlePage(driver)
-            title_screen.press_key('ENTER')
+            
+            if mobile:
+                title_screen.click()
+            else:
+                title_screen.press_key('ENTER')
 
         # elements
         self.play_btn = Button(self.driver, BTN_TEXT_LOCATORS['play'])
