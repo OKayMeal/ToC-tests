@@ -1,9 +1,10 @@
 from time import sleep
 from selenium.webdriver.remote.webdriver import WebDriver
 from BaseMobileTest import BaseMobileTest
+from pages.PauseMenu import PauseMenu
 
 class TestMobile(BaseMobileTest):
-    def test_Mobile_0001(self, driver: WebDriver):
+    def test_Mobile_0001(self):
         """
         Description:
         Testing basic touch mobile controls after starting a new game
@@ -35,3 +36,21 @@ class TestMobile(BaseMobileTest):
 
         assert initial_coordinates != new_coordinates, f'Mobile movement failure - coordinates havent changed, initial: {str(initial_coordinates[0])}, {str(initial_coordinates[1])} - new: {str(new_coordinates[0])}, {str(new_coordinates[1])}' # type: ignore
         assert new_ultReady == False, f'ultimateReady state should be false after touching ult btn, initial: {str(initial_ultReady)} new: {str(new_ultReady)}'
+
+    def test_Mobile_0002(self, driver: WebDriver):
+        """
+        Description:
+        Testing Pause Menu button If it displays the Pause Menu correctly
+
+        Test Steps:
+        1. Start the game with mobile screen size
+        2. Tap on Menu button on HUD 
+
+        Expected Result:
+        2. Pause Menu should display
+        """
+        self.hud.settings_btn.click()
+
+        pause_menu = PauseMenu(driver)
+
+        assert pause_menu.pause_menu_div.is_displayed(), "Pause menu not displayed"

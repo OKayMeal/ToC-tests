@@ -21,6 +21,8 @@ BTN_TEXT_LOCATORS = {
     'continue': 'CONTINUE',
     'submit_high_score': 'SUBMIT HIGH SCORE',
     'continue_no_submit': 'CONTINUE WITHOUT SUBMITTING',
+    'resume': 'RESUME',
+    'restart': 'RESTART',
 }
 
 # Title Screen
@@ -61,6 +63,7 @@ RIGHT_ARROW_BTN_LOC = (By.ID, 'right-arrow-btn')
 
 # Game HUD section
 SETTINGS_HUD_BTN_LOC = (By.ID, 'settings-btn')
+PAUSE_MENU_DIV_LOC = (By.ID, 'pause-menu')
 
 # Bestiary + Items pedia section
 RECORDS_CARD_LOC = (By.CLASS_NAME, 'records-card')
