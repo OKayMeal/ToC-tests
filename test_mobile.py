@@ -1,10 +1,11 @@
 from time import sleep
 from selenium.webdriver.remote.webdriver import WebDriver
 from BaseMobileTest import BaseMobileTest
+from pages.GameHUD import GameHUD
 from pages.PauseMenu import PauseMenu
 
 class TestMobile(BaseMobileTest):
-    def test_Mobile_0001(self):
+    def test_Mobile_0001(self, driver: WebDriver):
         """
         Description:
         Testing basic touch mobile controls after starting a new game
@@ -33,7 +34,9 @@ class TestMobile(BaseMobileTest):
 
         new_coordinates = self.game.get_player_properties('coordinates')
         new_ultReady = self.game.get_player_properties('ultimateReady')
+        self.hud = GameHUD(driver, ult_ready=False)
 
+        assert self.hud.ult_charge.is_displayed(), f"After using ult, Ult charge should be displayed"
         assert initial_coordinates != new_coordinates, f'Mobile movement failure - coordinates havent changed, initial: {str(initial_coordinates[0])}, {str(initial_coordinates[1])} - new: {str(new_coordinates[0])}, {str(new_coordinates[1])}' # type: ignore
         assert new_ultReady == False, f'ultimateReady state should be false after touching ult btn, initial: {str(initial_ultReady)} new: {str(new_ultReady)}'
 
