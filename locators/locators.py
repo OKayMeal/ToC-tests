@@ -21,6 +21,8 @@ BTN_TEXT_LOCATORS = {
     'continue': 'CONTINUE',
     'submit_high_score': 'SUBMIT HIGH SCORE',
     'continue_no_submit': 'CONTINUE WITHOUT SUBMITTING',
+    'resume': 'RESUME',
+    'restart': 'RESTART',
 }
 
 # Title Screen
@@ -49,6 +51,38 @@ NAVIGATION_WRAPPER_LOC = (By.CLASS_NAME, 'navigation-wrapper')
 
 # Game section
 GAME_CANVAS_LOC = (By.XPATH, "//canvas[contains(@style, 'image-rendering: pixelated;')]")
+
+# Mobile Controls section
+SHOOT_BTN_LOC = (By.ID, 'shoot-btn')
+ULT_BTN_LOC = (By.ID, 'ult-btn')
+TRAP_BTN_LOC = (By.ID, 'trap-btn')
+UP_ARROW_BTN_LOC = (By.ID, 'up-arrow-btn')
+DOWN_ARROW_BTN_LOC = (By.ID, 'down-arrow-btn')
+LEFT_ARROW_BTN_LOC = (By.ID, 'left-arrow-btn')
+RIGHT_ARROW_BTN_LOC = (By.ID, 'right-arrow-btn')
+
+# Game HUD section
+SETTINGS_HUD_BTN_LOC = (By.ID, 'settings-btn')
+PAUSE_MENU_DIV_LOC = (By.ID, 'pause-menu')
+HEARTS_CONTAINER_LOC = (By.CLASS_NAME, 'hearts-container')
+HEARTS_LOC = (By.TAG_NAME, 'img')
+HP_INDICATOR_LOC = (By.ID, 'hp-indicator')
+STATS_CONTAINER_LOC = (By.CLASS_NAME, 'stats')
+LVL_STATS_LOC = (By.XPATH, "//p[contains(text(), 'LVL')]")
+ATK_STATS_LOC = (By.XPATH, "//p[contains(text(), 'ATK')]")
+DEF_STATS_LOC = (By.XPATH, "//p[contains(text(), 'DEF')]")
+SPEED_STATS_LOC = (By.XPATH, "//p[contains(text(), 'SPEED')]")
+EQUIPMENT_CONTAINER_LOC = (By.CLASS_NAME, 'equipment-container')
+GOLD_INDICATOR_LOC = (By.ID, 'gold-indicator')
+ULT_LABEL_LOC = (By.XPATH, "//p[contains(text(), 'ULT')]")
+ULT_IMAGE_LOC = (By.ID, 'ultImage')
+ULT_CHARGE_INDICATOR_LOC = (By.ID, 'ult-charge')
+TRAPS_LABEL_LOC = (By.XPATH, "//p[contains(text(), 'Traps')]")
+TRAPS_INDICATOR_LOC = (By.ID, 'traps-indicator')
+KEYS_LABEL_LOC = (By.XPATH, "//p[contains(text(), 'Keys')]")
+KEYS_INDICATOR_LOC = (By.ID, 'keys-indicator')
+ENEMIES_LABEL_LOC = (By.XPATH, "//p[contains(text(), 'Enemies')]")
+ENEMIES_INDICATOR_LOC = (By.ID, 'enemies-left')
 
 # Bestiary + Items pedia section
 RECORDS_CARD_LOC = (By.CLASS_NAME, 'records-card')
